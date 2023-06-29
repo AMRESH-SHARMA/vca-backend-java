@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
-import com.vca.entity.SubCategory;
+import com.vca.entity.Manufacturer;
 
 public interface SubCategoryService {
 
-	ResponseEntity<List<SubCategory>> getAllByCategoryId(Long Id);
+	ResponseEntity<List<Manufacturer>> getAllByCategoryId(Long Id);
 
 }

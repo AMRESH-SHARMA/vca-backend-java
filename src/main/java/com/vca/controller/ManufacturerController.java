@@ -9,20 +9,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vca.repository.ProductRepository;
+import com.vca.entity.Manufacturer;
+import com.vca.repository.ManufacturerRepository;
 
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api")
-public class ProductController {
+public class ManufacturerController {
 
 	@Autowired
-	ProductRepository repository;
+	ManufacturerRepository repository;
 
-	@GetMapping("/p/{categoryId}/{subcategoryId}")
-	public List<?> getAllByCategoryIdSubCategoryId(@PathVariable(value = "categoryId") Long categoryId,
-			@PathVariable(value = "subcategoryId") Long subcategoryId) {
-		return repository.findByCategory_IdAndSubcategory_Id(categoryId, subcategoryId);
+	@GetMapping("/m/{seg_Id}")
+	public List<Manufacturer> getAllManufacturerBySegId(@PathVariable(value = "seg_Id") Long seg_Id) {
+		return repository.findBySegment_id(seg_Id);
 	}
 
 }

@@ -3,20 +3,20 @@ package com.vca.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "categories")
-public class Category {
+@Table(name = "segments")
+public class Segment {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	private String name;
+	private String segName;
 
-	public Category() {
+	public Segment() {
 	}
 
-	public Category(String name) {
-		this.name = name;
+	public Segment(String segName) {
+		this.segName = segName;
 	}
 
 	public long getId() {
@@ -24,12 +24,12 @@ public class Category {
 	}
 
 	public String getname() {
-		return name;
+		return segName;
 	}
 
 	@Override
 	public String toString() {
-		return "Tutorial [id=" + id + ", name=" + name + "]";
+		return "Segment [id=" + id + ", name=" + segName + "]";
 	}
 
 }

@@ -8,42 +8,42 @@ import org.hibernate.annotations.OnDeleteAction;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "products")
-public class Product {
+@Table(name = "models")
+public class Model {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String name;
+	private String modName;
 
 	// @ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "category_id", nullable = false)
+	@JoinColumn(name = "seg_id", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonIgnore
-	private Category category;
+	private Segment segment;
 
 	// @ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "subcategory_id", nullable = false)
+	@JoinColumn(name = "mfg_id", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonIgnore
-	private SubCategory subcategory;
+	private Manufacturer manufacturer;
 
 	public Long getId() {
 		return id;
 	}
 
 	public String getName() {
-		return name;
+		return modName;
 	}
 
-	public Category getCategory() {
-		return category;
+	public Segment getSegment() {
+		return segment;
 	}
 
-	public SubCategory getSubCategory() {
-		return subcategory;
+	public Manufacturer getManufacturer() {
+		return manufacturer;
 	}
 
 }

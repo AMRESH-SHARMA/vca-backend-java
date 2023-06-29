@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
-import com.vca.entity.Category;
+import com.vca.entity.Segment;
 
 public interface CategoryService {
 
-	ResponseEntity<List<Category>> getAll();
+	ResponseEntity<List<Segment>> getAll();
 
 }
