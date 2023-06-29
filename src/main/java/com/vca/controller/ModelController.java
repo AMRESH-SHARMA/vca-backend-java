@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vca.exception.ResourceNotFoundException;
 import com.vca.repository.ModelRepository;
 
 @CrossOrigin(origins = "http://localhost:8081")
@@ -27,7 +28,7 @@ public class ModelController {
 	    List<?> models = repository.findModelBySeg_IdAndMfg_Id(segId, mfgId);
 	    
 		if (models.isEmpty()) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			 throw new ResourceNotFoundException("No data found");
 		}
 		
 	    return new ResponseEntity<>(models, HttpStatus.OK);

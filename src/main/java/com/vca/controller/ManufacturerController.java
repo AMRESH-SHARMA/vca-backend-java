@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vca.entity.Manufacturer;
+import com.vca.exception.ResourceNotFoundException;
 import com.vca.repository.ManufacturerRepository;
 
 @CrossOrigin(origins = "http://localhost:8081")
@@ -26,10 +27,10 @@ public class ManufacturerController {
 	public ResponseEntity<List<Manufacturer>> getAllManufacturerBySegId(@PathVariable(value = "seg_Id") Long seg_Id) {
 		List<Manufacturer> manufacturers = repository.findBySegment_id(seg_Id);
 
-		if (manufacturers.isEmpty()) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-
+	    if (manufacturers.isEmpty()) {
+	        throw new ResourceNotFoundException("No data found");
+	    }
+	    
 		return new ResponseEntity<>(manufacturers, HttpStatus.OK);
 	}
 

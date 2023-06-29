@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vca.entity.Segment;
+import com.vca.exception.ResourceNotFoundException;
 import com.vca.repository.SegmentRepository;
 
 @CrossOrigin(origins = "http://localhost:8081")
@@ -26,7 +27,7 @@ public class SegmentController {
 		List<Segment> segments = repository.findAll();
 		
 		if (segments.isEmpty()) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			 throw new ResourceNotFoundException("No data found");
 		}
 		
 		return new ResponseEntity<>(segments, HttpStatus.OK);
