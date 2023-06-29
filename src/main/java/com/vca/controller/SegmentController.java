@@ -3,6 +3,8 @@ package com.vca.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +22,13 @@ public class SegmentController {
 	SegmentRepository repository;
 
 	@GetMapping("/s")
-	public List<Segment> getAllSegments() {
-		return repository.findAll();
+	public ResponseEntity<List<Segment>> getAllSegments() {
+		List<Segment> segments = repository.findAll();
+		
+		if (segments.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<>(segments, HttpStatus.OK);
 	}
-
 }
