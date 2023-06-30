@@ -1,6 +1,7 @@
 package com.vca.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,15 +24,16 @@ public class ModelController {
 	ModelRepository repository;
 
 	@GetMapping("/m/{segId}/{mfgId}")
-	public ResponseEntity<List<?>> getAllBySegIdMfgId(@PathVariable(value = "segId") Long segId,
+	public ResponseEntity<List<Map<String, Object>>> getAllBySegIdMfgId(@PathVariable(value = "segId") Long segId,
 	        @PathVariable(value = "mfgId") Long mfgId) {
-	    List<?> models = repository.findModelBySeg_IdAndMfg_Id(segId, mfgId);
-	    
-		if (models.isEmpty()) {
-			 throw new ResourceNotFoundException("No data found");
-		}
-		
+	    List<Map<String, Object>> models = repository.findModelBySeg_IdAndMfg_Id(segId, mfgId);
+
+	    if (models.isEmpty()) {
+	        throw new ResourceNotFoundException("No data found");
+	    }
+
 	    return new ResponseEntity<>(models, HttpStatus.OK);
 	}
+
 
 }
