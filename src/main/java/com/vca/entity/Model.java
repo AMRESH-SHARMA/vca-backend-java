@@ -14,6 +14,7 @@ public class Model {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(nullable = false)
 	private String modName;
 
 	// @ManyToOne(fetch = FetchType.EAGER, optional = false)
