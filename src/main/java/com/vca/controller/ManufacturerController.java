@@ -21,7 +21,7 @@ public class ManufacturerController {
 	@Autowired
 	ManufacturerRepository repository;
 
-	@GetMapping("/m/{seg_Id}")
+	@GetMapping("/manufacturers/{seg_Id}")
 	public ResponseEntity<List<Manufacturer>> getAllManufacturerBySegId(@PathVariable(value = "seg_Id") Long seg_Id) {
 		List<Manufacturer> manufacturers = repository.findBySegment_id(seg_Id);
 

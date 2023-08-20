@@ -20,7 +20,7 @@ public class SegmentController {
 	@Autowired
 	SegmentRepository repository;
 
-	@GetMapping("/s")
+	@GetMapping("/segments")
 	public ResponseEntity<List<Segment>> getAllSegments() {
 		List<Segment> segments = repository.findAll();
 

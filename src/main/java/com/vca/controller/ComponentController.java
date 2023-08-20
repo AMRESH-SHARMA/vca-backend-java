@@ -17,7 +17,7 @@ public class ComponentController {
 	@Autowired
 	ComponentRepository repository;
 
-	@GetMapping("/c")
+	@GetMapping("/components")
 	public ResponseEntity<List<Component>> getAllComponentById() {
 		List<Component> components = repository.findAll();
 
