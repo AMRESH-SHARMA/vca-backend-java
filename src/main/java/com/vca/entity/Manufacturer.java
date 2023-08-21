@@ -2,6 +2,8 @@ package com.vca.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -15,11 +17,20 @@ public class Manufacturer {
 	private Long id;
 	
 	@Column(nullable = false)
-	private String mfgName;
+	private String manuName;
 
+    // Define 'createdAt' and 'updatedAt' fields with 'TIMESTAMP' data type
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "createdAt", nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private Date createdAt;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "updatedAt", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    private Date updatedAt;
+    
 //  @ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "seg_id", nullable = false)
+	@JoinColumn(name = "segId", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonIgnore
 	private Segment segment;
@@ -29,7 +40,7 @@ public class Manufacturer {
 	}
 
 	public String getName() {
-		return mfgName;
+		return manuName;
 	}
 
 	public Segment getSegment() {
