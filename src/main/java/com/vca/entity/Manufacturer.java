@@ -18,15 +18,6 @@ public class Manufacturer {
 	
 	@Column(nullable = false)
 	private String manuName;
-
-    // Define 'createdAt' and 'updatedAt' fields with 'TIMESTAMP' data type
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "createdAt", nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private Date createdAt;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "updatedAt", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
-    private Date updatedAt;
     
 //  @ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -35,6 +26,16 @@ public class Manufacturer {
 	@JsonIgnore
 	private Segment segment;
 
+    // Define 'createdAt' and 'updatedAt' fields with 'TIMESTAMP' data type
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private Date createdAt;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    private Date updatedAt;
+    
+    
 	public Long getId() {
 		return id;
 	}

@@ -55,7 +55,7 @@ public class ModelController {
 	// This is Paginated API
 	@GetMapping("/models/{segId}/{manuId}")
 	public ResponseEntity<Object> getAllModelsByManuIdAndSegId(@PathVariable Long segId, @PathVariable Long manuId,
-			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "1") int size) {
+			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "6") int size) {
 
 		try {
 

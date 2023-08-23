@@ -1,10 +1,10 @@
-package com.bezkoder.spring.hibernate.onetomany;
+package com.vca.test;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringBootOneToManyApplicationTests {
+class vca_tests {
 
 	@Test
 	void contextLoads() {
