@@ -1,4 +1,4 @@
-package com.vca.repository;
+package com.vca.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

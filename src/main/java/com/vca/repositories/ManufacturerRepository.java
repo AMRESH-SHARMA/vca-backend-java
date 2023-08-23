@@ -1,4 +1,4 @@
-package com.vca.repository;
+package com.vca.repositories;
 
 import java.util.List;
 
@@ -8,6 +8,6 @@ import com.vca.entity.Manufacturer;
 
 public interface ManufacturerRepository extends JpaRepository<Manufacturer, Long> {
 
-	List<Manufacturer> findBySegment_id(Long seg_Id);
+	List<Manufacturer> findBySegmentId(Long segId);
 
 }
