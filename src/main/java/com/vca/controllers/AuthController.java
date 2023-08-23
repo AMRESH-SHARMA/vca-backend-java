@@ -3,6 +3,7 @@ package com.vca.controllers;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -10,15 +11,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
+import com.vca.entity.Registration;
+import com.vca.repositories.RegistrationRepository;
+import com.vca.services.RegistrationService;
+
 import response.ResponseHandler;
 
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/api/auth")
 public class AuthController {
+	
+	@Autowired
+    private RegistrationService registrationService;
 
 	@PostMapping("/login")
-	public ResponseEntity<Object> Login(){
+	public ResponseEntity<Object> Login(@RequestBody Registration company){
 		
 		try {
 	        // Authenticate the user here and generate a JWT token upon successful login
@@ -26,12 +35,15 @@ public class AuthController {
 
 	        // If authentication is successful, generate a JWT token
 			// String jwtToken = generateJwtToken(loginRequest.getUsername()); // Replace with your token generation logic
-
-	        Map<String, Object> responseData = new HashMap<>();
-	        responseData.put("status", "success");
-//	        responseData.put("token", jwtToken);
-			
-			return ResponseHandler.apiResponse("Registered", HttpStatus.OK, responseData);
+			Registration existComp=registrationService.findByUsername(company.getEmail());
+	    	if(existComp==null||!existComp.getPassword().equals(company.getPassword())) {
+	    		return ResponseEntity.badRequest().body("Invalid Credential");
+	    	}
+	    		Map<String, Object> responseData = new HashMap<>();
+	            responseData.put("status", "success");
+	          //  responseData.put("token", jwtToken);
+	            return ResponseEntity.status(HttpStatus.OK).body(responseData);
+	       
 		}catch(Exception e) {
 			// Handle authentication failure
 	        Map<String, Object> errorResponse = new HashMap<>();
@@ -43,9 +55,15 @@ public class AuthController {
 	}
 	
 	@PostMapping("/register")
-	public ResponseEntity<Object> Register(){
+	public ResponseEntity<Object> Register(@RequestBody  Registration registretion){
 		try {
+			
 			// Implement your registration logic here
+			if(registrationService.findByUsername(registretion.getEmail())!=null)
+	    	{
+	    		return ResponseEntity.badRequest().body("username already exist");
+	    	}
+		       registrationService.createRegistration(registretion);
 			
 			return ResponseHandler.apiResponse("Registration successful", HttpStatus.OK, null);
 		}catch(Exception e) {
