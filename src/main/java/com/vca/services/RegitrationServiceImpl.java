@@ -2,11 +2,15 @@ package com.vca.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import com.vca.entity.Registration;
 import com.vca.repositories.RegistrationRepository;
 
+import jakarta.validation.Valid;
+
 @Service
+@Validated
 public class RegitrationServiceImpl implements RegistrationService{
 	
 	@Autowired

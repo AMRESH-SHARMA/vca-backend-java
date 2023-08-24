@@ -6,8 +6,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,8 +20,10 @@ import com.vca.entity.Registration;
 import com.vca.repositories.RegistrationRepository;
 import com.vca.services.RegistrationService;
 
+import jakarta.validation.Valid;
 import response.ResponseHandler;
 
+@Validated
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/api/auth")
@@ -27,7 +33,7 @@ public class AuthController {
     private RegistrationService registrationService;
 
 	@PostMapping("/login")
-	public ResponseEntity<Object> Login(@RequestBody Registration company){
+	public ResponseEntity<Object> Login( @RequestBody  Registration company, BindingResult bindingResult){
 		
 		try {
 	        // Authenticate the user here and generate a JWT token upon successful login
@@ -55,7 +61,7 @@ public class AuthController {
 	}
 	
 	@PostMapping("/register")
-	public ResponseEntity<Object> Register(@RequestBody  Registration registretion){
+	public ResponseEntity<Object> Register( @RequestBody @Valid Registration registretion,BindingResult bindingResult){
 		try {
 			
 			// Implement your registration logic here
@@ -63,6 +69,10 @@ public class AuthController {
 	    	{
 	    		return ResponseEntity.badRequest().body("username already exist");
 	    	}
+			if (bindingResult.hasErrors()) {
+	            return ResponseEntity.badRequest().body("Validation errors");
+	        }
+
 		       registrationService.createRegistration(registretion);
 			
 			return ResponseHandler.apiResponse("Registration successful", HttpStatus.OK, null);
