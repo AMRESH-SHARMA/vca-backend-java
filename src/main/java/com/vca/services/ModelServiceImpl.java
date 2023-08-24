@@ -23,4 +23,9 @@ public class ModelServiceImpl implements ModelService {
         return modelRepository.findAllByOrderByCreatedAtDesc(pageable);
     }
     
+    @Override
+    public Model getModelsById(long id) {
+        return modelRepository.findById(id).get();
+    }
+    
 }
