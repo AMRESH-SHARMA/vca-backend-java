@@ -72,6 +72,23 @@ public class ModelController {
 		} catch (Exception e) {
 			return ResponseHandler.apiResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
 		}
+		
+	}
+	
+		// This is Paginated API
+		@GetMapping("/models/{modId}")
+		public ResponseEntity<Object> getModelsById(@PathVariable Long modId) {
+
+			try {
+				Model data = modelService.getModelsById(modId);
+
+				Map<String, Object> response = new HashMap<>();
+				response.put("models", data);
+
+				return ResponseHandler.apiResponse("Model retrieved successfully", HttpStatus.OK, response);
+			} catch (Exception e) {
+				return ResponseHandler.apiResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
+			}
 	}
 
 }
