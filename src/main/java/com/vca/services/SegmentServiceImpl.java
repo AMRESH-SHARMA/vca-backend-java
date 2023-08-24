@@ -15,5 +15,7 @@ public class SegmentServiceImpl implements SegmentService {
 	@Override
 	public List<Segment> getAllSegments() {
 		return segmentRepository.findAll();
+		
+		
 	}
 }

@@ -1,7 +1,7 @@
 package com.vca.entity;
 
 import java.util.Date;
-
+import java.util.Set;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,7 +10,7 @@ public class Segment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
     @Column(nullable = false, unique = true)
     private String segName;
@@ -31,10 +31,10 @@ public class Segment {
         this.segName = segName;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
-
+    
     public String getName() {
         return segName;
     }
@@ -43,4 +43,6 @@ public class Segment {
     public String toString() {
         return "Segment [id=" + id + ", name=" + segName + "]";
     }
+    
+    
 }

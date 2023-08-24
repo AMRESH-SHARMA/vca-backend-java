@@ -3,6 +3,7 @@ package com.vca.entity;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.Set;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -14,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Manufacturer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private int id;
 	
 	@Column(nullable = false)
 	private String manuName;
@@ -28,14 +29,14 @@ public class Manufacturer {
     @Column(name = "updatedAt", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private Date updatedAt;
     
-//  @ManyToOne(fetch = FetchType.EAGER, optional = false)
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "segId", nullable = false)
-	@OnDelete(action = OnDeleteAction.CASCADE)
-	@JsonIgnore
-	private Segment segment;
+////  @ManyToOne(fetch = FetchType.EAGER, optional = false)
+//	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+//	@JoinColumn(name = "segId", nullable = false)
+//	@OnDelete(action = OnDeleteAction.CASCADE)
+//	@JsonIgnore
+//	private Segment segment;
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -46,5 +47,10 @@ public class Manufacturer {
 	public Segment getSegment() {
 		return segment;
 	}
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "seg_id")
+	private Segment segment;
+
 
 }

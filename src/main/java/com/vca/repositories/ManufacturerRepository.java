@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.vca.entity.Manufacturer;
 
-public interface ManufacturerRepository extends JpaRepository<Manufacturer, Long> {
+public interface ManufacturerRepository extends JpaRepository<Manufacturer, Integer> {
 
-	List<Manufacturer> findBySegmentId(Long segId);
+	List<Manufacturer> findBySegmentId(int segId);
 
 }

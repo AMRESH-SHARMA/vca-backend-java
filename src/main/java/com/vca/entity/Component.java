@@ -1,32 +1,38 @@
 package com.vca.entity;
 
-import jakarta.persistence.*;
+import java.io.Serializable;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 
 @Entity
-@Table(name = "components")
-public class Component {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-
-	@Column(nullable = false)
+@Table(name="Component")
+public class Component implements Serializable
+{
+	private int compId;
 	private String compName;
-
-	public Component() {
-
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="comp_id")
+	public int getCompId() {
+		return compId;
 	}
-
-	public Long getId() {
-		return id;
+	public void setCompId(int compId) {
+		this.compId = compId;
 	}
-
+		
+	@Column(name="comp_name")
 	public String getCompName() {
 		return compName;
 	}
-
-	@Override
-	public String toString() {
-		return "Component [id=" + id + ", compName=" + compName + "]";
-	}
-
+	public void setCompName(String compName) {
+		this.compName = compName;
+	} 
+	
 }

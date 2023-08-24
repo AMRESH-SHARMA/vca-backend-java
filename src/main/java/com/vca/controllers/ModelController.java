@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vca.entity.Model;
+import com.vca.entity.Segment;
 import com.vca.services.ModelService;
 
 import response.ResponseHandler;
@@ -54,7 +55,7 @@ public class ModelController {
 
 	// This is Paginated API
 	@GetMapping("/models/{segId}/{manuId}")
-	public ResponseEntity<Object> getAllModelsByManuIdAndSegId(@PathVariable Long segId, @PathVariable Long manuId,
+	public ResponseEntity<Object> getAllModelsByManuIdAndSegId(@PathVariable int segId, @PathVariable int manuId,
 			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "1") int size) {
 
 		try {
@@ -72,6 +73,22 @@ public class ModelController {
 		} catch (Exception e) {
 			return ResponseHandler.apiResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
 		}
+	}
+	
+	@GetMapping("/models/{segId}")
+	public List<Model> getModelBySegId(@PathVariable int segId, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "1") int size){
+		
+		List<Model> modelsPage = modelService.getModelsBySegId(segId);
+		//Map<String, List<Model>> response = new HashMap<>();
+		//response.put("models", modelsPage);
+		//System.out.println("inside Controller --> "+ response.get("models"));
+		
+		System.out.println(modelsPage.get(0).getSegment());
+		
+		return modelsPage;
+		
+		//return modelService.getModelsBySegId(segId);
+		
 	}
 
 }

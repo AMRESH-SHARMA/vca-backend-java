@@ -5,5 +5,5 @@ import com.vca.entity.Manufacturer;
 
 public interface ManufacturerService {
 
-	List<Manufacturer> getAllManufacturersById(Long id);
+	List<Manufacturer> getAllManufacturersById(int id);
 }

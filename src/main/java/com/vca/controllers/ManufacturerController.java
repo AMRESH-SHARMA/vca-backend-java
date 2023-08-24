@@ -24,7 +24,7 @@ public class ManufacturerController {
 	ManufacturerService manufacturerService;
 
 	@GetMapping("/manufacturers/{segId}")
-	public ResponseEntity<Object> getManufacturers(@PathVariable(value = "segId") Long segId) {
+	public ResponseEntity<Object> getManufacturers(@PathVariable(value = "segId") int segId) {
 		try {
 			List<Manufacturer> data = manufacturerService.getAllManufacturersById(segId);
 			return ResponseHandler.apiResponse("Manufacturers retrieved successfully", HttpStatus.OK, data);

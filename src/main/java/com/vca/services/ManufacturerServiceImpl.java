@@ -13,7 +13,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 	ManufacturerRepository manufacturerRepository;
 
 	@Override
-	public List<Manufacturer> getAllManufacturersById(Long segId) {
+	public List<Manufacturer> getAllManufacturersById(int segId) {
 		return manufacturerRepository.findBySegmentId(segId);
 	}
 
