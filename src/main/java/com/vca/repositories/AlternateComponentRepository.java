@@ -15,7 +15,8 @@ public interface AlternateComponentRepository extends JpaRepository<AlternateCom
 //	List<Map<String,Object>> findCompByModelId(@Param("modelId") long id, @Param("comp_type") char comp_type);
 
 //	@Query(nativeQuery = true, value = "SELECT * FROM alternate_components a WHERE a.mod_id = :mod_id AND a.comp_id = :comp_id and a.comp_id!=a.alt_comp_id")
-	@Query(nativeQuery = true, value = "SELECT * FROM alternate_components a JOIN components ON a.comp_id = components.id WHERE a.mod_id =:mod_id AND a.comp_Id =:comp_id")
+//	@Query(nativeQuery = true, value = "SELECT * FROM alternate_components a JOIN components ON a.comp_id = components.id WHERE a.mod_id =:mod_id AND a.comp_Id =:comp_id")
+	@Query(nativeQuery = true, value = "select c.id, c.comp_name from alternate_components a join components c on a.alt_comp_id = c.id where a.mod_id = :mod_id and a.comp_id = :comp_id and a.comp_id <> a.alt_comp_id")
 	
 	List<Map<String,Object>> findByModelIdAndCompId(@Param("mod_id") int mod_id, @Param("comp_id") int comp_id);
 
