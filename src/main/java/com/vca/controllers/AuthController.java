@@ -1,3 +1,4 @@
+//
 //package com.vca.controllers;
 //
 //import java.util.HashMap;
@@ -6,6 +7,8 @@
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.http.HttpStatus;
 //import org.springframework.http.ResponseEntity;
+//import org.springframework.validation.BindingResult;
+//import org.springframework.validation.annotation.Validated;
 //import org.springframework.web.bind.annotation.CrossOrigin;
 //import org.springframework.web.bind.annotation.PostMapping;
 //import org.springframework.web.bind.annotation.RequestBody;
@@ -15,8 +18,10 @@
 //import com.vca.entity.Registration;
 //import com.vca.services.RegistrationService;
 //
+//import jakarta.validation.Valid;
 //import response.ResponseHandler;
 //
+//@Validated
 //@RestController
 //@CrossOrigin(origins = "*")
 //@RequestMapping("/api/auth")
@@ -26,7 +31,7 @@
 //    private RegistrationService registrationService;
 //
 //	@PostMapping("/login")
-//	public ResponseEntity<Object> Login(@RequestBody Registration company){
+//	public ResponseEntity<Object> Login( @RequestBody  Registration company, BindingResult bindingResult){
 //		
 //		try {
 //	        // Authenticate the user here and generate a JWT token upon successful login
@@ -54,20 +59,23 @@
 //	}
 //	
 //	@PostMapping("/register")
-//	public ResponseEntity<Object> Register(@RequestBody  Registration registretion){
+//	public ResponseEntity<Object> Register( @RequestBody @Valid Registration registretion, BindingResult bindingResult){
 //		try {
 //			
 //			// Implement your registration logic here
 //			if(registrationService.findByUsername(registretion.getEmail())!=null)
 //	    	{
-//	    		return ResponseEntity.badRequest().body("username already exist");
+//				return ResponseHandler.apiResponse("username already exist", HttpStatus.BAD_REQUEST, null);
 //	    	}
+//			if (bindingResult.hasErrors()) {
+//				return ResponseHandler.apiResponse("Validation response", HttpStatus.OK, null);
+//	        }
+//
 //		       registrationService.createRegistration(registretion);
 //			
 //			return ResponseHandler.apiResponse("Registration successful", HttpStatus.OK, null);
 //		}catch(Exception e) {
 //	        Map<String, Object> errorResponse = new HashMap<>();
-//	        errorResponse.put("status", "error");
 //	        errorResponse.put("message", "Authentication failed");
 //			return ResponseHandler.apiResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
 //		}

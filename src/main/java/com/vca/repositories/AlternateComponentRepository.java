@@ -10,7 +10,10 @@ import org.springframework.data.repository.query.Param;
 import com.vca.entity.AlternateComponent;
 
 public interface AlternateComponentRepository extends JpaRepository<AlternateComponent, Long>  {
-	@Query(nativeQuery = true, value = "select c.id, c.comp_name from alternate_components a join components c on a.alt_comp_id = c.id where a.mod_id = :mod_id and a.comp_id = :comp_id and a.comp_id <> a.alt_comp_id")
+
+
+@Query(nativeQuery = true, value = "select c.id, c.comp_name from alternate_components a join components c on a.alt_comp_id = c.id where a.mod_id = :mod_id and a.comp_id = :comp_id and a.comp_id <> a.alt_comp_id")
+	
 	List<Map<String,Object>> findByModelIdAndCompId(@Param("mod_id") int mod_id, @Param("comp_id") int comp_id);
 
 }

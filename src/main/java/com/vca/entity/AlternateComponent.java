@@ -41,14 +41,14 @@ public class AlternateComponent
  
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 //	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "comp_id", nullable = false)
+	@JoinColumn(name = "alt_comp_id", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 //	@JsonIgnore
 	private Component compId;
 	
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 //	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "alt_comp_id", nullable = false)
+	@JoinColumn(name = "comp_id", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 //	@JsonIgnore
 	private Component altCompId;
