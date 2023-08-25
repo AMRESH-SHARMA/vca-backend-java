@@ -9,4 +9,5 @@ public interface ModelService {
 
 	Page<Model> getAllModels(Pageable pageable);
 	
+	Model getModelsById(long id);
 }

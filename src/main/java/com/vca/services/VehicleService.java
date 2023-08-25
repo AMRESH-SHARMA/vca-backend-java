@@ -1,10 +1,9 @@
 package com.vca.services;
 
-import com.vca.entity.Vehicle;
-
+import java.util.List;
 
 public interface VehicleService {
 
-	Vehicle getVehicleByID(long id);
+	List<?> getCompByModelID(long id, char c);
 
 }
