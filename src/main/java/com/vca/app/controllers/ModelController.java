@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +23,7 @@ import com.vca.app.services.ModelService;
 import com.vca.handlers.ResponseHandler;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api")
 public class ModelController {
 
@@ -71,23 +72,23 @@ public class ModelController {
 		} catch (Exception e) {
 			return ResponseHandler.apiResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
 		}
-		
+
 	}
-	
-		// This is Paginated API
-		@GetMapping("/models/{modId}")
-		public ResponseEntity<Object> getModelsById(@PathVariable Long modId) {
 
-			try {
-				Model data = modelService.getModelsById(modId);
+	// This is Paginated API
+	@GetMapping("/models/{modId}")
+	public ResponseEntity<Object> getModelsById(@PathVariable Long modId) {
 
-				Map<String, Object> response = new HashMap<>();
-				response.put("models", data);
+		try {
+			Model data = modelService.getModelsById(modId);
 
-				return ResponseHandler.apiResponse("Model retrieved successfully", HttpStatus.OK, response);
-			} catch (Exception e) {
-				return ResponseHandler.apiResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
-			}
+			Map<String, Object> response = new HashMap<>();
+			response.put("models", data);
+
+			return ResponseHandler.apiResponse("Model retrieved successfully", HttpStatus.OK, response);
+		} catch (Exception e) {
+			return ResponseHandler.apiResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
+		}
 	}
 
 }
