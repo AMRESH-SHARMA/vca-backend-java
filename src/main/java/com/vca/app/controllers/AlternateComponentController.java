@@ -20,12 +20,11 @@ public class AlternateComponentController {
 	@Autowired
 	AlternateComponentService service;
 
-	@GetMapping(value = "api/alternate_components/{modId}/{compId}")
+	@GetMapping(value = "api/alternate-components/{modId}/{compId}")
 	public ResponseEntity<Object> showStdComponents(@PathVariable(value = "modId") int mod_id,
 			@PathVariable(value = "compId") int com_id) {
 		List<?> data = service.findByModelIdAndCompId(mod_id, com_id);
 		return ResponseHandler.apiResponse("Models retrieved successfully", HttpStatus.OK, data);
-		// return service.findByModelIdAndCompId(mod_id, com_id);
 	}
 
 }
