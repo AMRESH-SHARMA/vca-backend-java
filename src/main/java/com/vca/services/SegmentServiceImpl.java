@@ -11,6 +11,15 @@ public class SegmentServiceImpl implements SegmentService {
 
 	@Autowired
 	SegmentRepository segmentRepository;
+	
+	
+
+	public SegmentServiceImpl(SegmentRepository segmentRepository) {
+		super();
+		this.segmentRepository = segmentRepository;
+	}
+
+
 
 	@Override
 	public List<Segment> getAllSegments() {

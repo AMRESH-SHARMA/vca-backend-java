@@ -14,15 +14,6 @@ public class Segment {
 
     @Column(nullable = false, unique = true)
     private String segName;
-
-    // Define 'createdAt' and 'updatedAt' fields with 'TIMESTAMP' data type
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private Date createdAt;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
-    private Date updatedAt;
     
     public Segment() {
     }
@@ -43,4 +34,14 @@ public class Segment {
     public String toString() {
         return "Segment [id=" + id + ", name=" + segName + "]";
     }
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public void setSegName(String segName) {
+		this.segName = segName;
+	}
+    
+    
 }
