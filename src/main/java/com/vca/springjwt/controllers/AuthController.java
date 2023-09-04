@@ -16,6 +16,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -143,4 +145,14 @@ public class AuthController {
 		return ResponseHandler.apiResponse("User registered successfully!", HttpStatus.OK, null);
 	}
 	
+	@GetMapping(value = "/user/{user_id}")
+	public ResponseEntity<Object> getVehicleByID(@PathVariable Long user_id) {
+
+		try {
+			 List<Map<String, Object>> data = userRepository.findByUserId(user_id);
+			return ResponseHandler.apiResponse("User data", HttpStatus.OK, data);
+		} catch (Exception e) {
+			return ResponseHandler.apiResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
+		}
+	}
 }
